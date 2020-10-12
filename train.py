@@ -5,7 +5,7 @@ import time
 import argparse
 import numpy as np
 import random, os
-
+from random import shuffle
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
@@ -123,6 +123,7 @@ def train(epoch, best_acc, patience):
     loss_accum = 0
     avg_acc = 0
     idx_list = np.arange(len(idx_train))
+    shuffle(idx_list)
     for i in range(total_iters):
         # selected_idx = np.random.permutation(len(idx_train))[:args.batch_size]
         selected_idx = idx_list[(i*args.batch_size):((i+1)*args.batch_size)]
